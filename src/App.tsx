@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   BackgroundStars,
   Fireworks,
+  Snowfall,
   CountdownDisplay,
   CelebrationDisplay,
   WishForm,
-  ResolutionTracker,
   Header,
   Footer,
 } from '@/components';
@@ -49,6 +49,7 @@ const App: React.FC = () => {
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center justify-center p-4 overflow-hidden select-none">
       <BackgroundStars />
+      <Snowfall />
       {isFinished && <Fireworks />}
 
       {/* Background Gradient */}
@@ -63,15 +64,16 @@ const App: React.FC = () => {
       />
 
       {/* Main Content */}
-      <main className="z-10 text-center flex flex-col items-center">
+      <main className="z-10 text-center flex flex-col items-center w-full max-w-6xl">
         {!isFinished ? (
           <CountdownDisplay timeLeft={timeLeft} />
         ) : (
           <CelebrationDisplay />
         )}
 
-        <WishForm />
-        <ResolutionTracker />
+        <div className="flex flex-col gap-6 mt-8 w-full px-4 items-center justify-center">
+          <WishForm />
+        </div>
       </main>
 
       <Footer />

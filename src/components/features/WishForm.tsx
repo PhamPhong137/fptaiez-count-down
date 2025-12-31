@@ -32,7 +32,7 @@ const WishForm: React.FC = () => {
   };
 
   return (
-    <div className="mt-16 w-full max-w-lg flex flex-col items-center px-4">
+    <div className="w-full max-w-md flex flex-col items-center">
       <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 w-full shadow-2xl">
         <div className="flex items-center gap-2 mb-4">
           <Heart className="text-pink-400" size={20} />

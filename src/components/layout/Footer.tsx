@@ -1,5 +1,4 @@
 import React from 'react';
-import { Heart } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -7,7 +6,7 @@ const Footer: React.FC = () => {
       <span>EST. JAN 1ST 2026</span>
       <div className="w-12 h-[1px] bg-white/10" />
       <span className="flex items-center gap-1">
-        Made with <Heart size={10} className="text-red-500 inline fill-current" /> for the future
+        Made by <span className="text-yellow-400 font-semibold">FPTAIEZ</span> team
       </span>
     </footer>
   );

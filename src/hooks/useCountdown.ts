@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { TimeLeft, TimeZone } from '@/types';
-import { TARGET_DATE } from '@/constants';
 
 export function useCountdown(selectedTimeZone: TimeZone) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
@@ -15,15 +14,20 @@ export function useCountdown(selectedTimeZone: TimeZone) {
   const calculateTimeLeft = useCallback((): TimeLeft => {
     const now = new Date();
 
-    let target = new Date(TARGET_DATE);
-    if (selectedTimeZone.label !== 'Local Time') {
-      const gmtTarget = new Date(
-        TARGET_DATE.getTime() - selectedTimeZone.offset * 60 * 60 * 1000
-      );
-      target = gmtTarget;
+    let targetTime: number;
+
+    if (selectedTimeZone.label === 'Local Time') {
+      // Midnight Jan 1, 2026 in local time
+      targetTime = new Date(2026, 0, 1, 0, 0, 0).getTime();
+    } else {
+      // Midnight Jan 1, 2026 in the selected timezone
+      // Convert: when it's midnight in that timezone, what UTC time is it?
+      // UTC time = local midnight - offset
+      const utcMidnight = Date.UTC(2026, 0, 1, 0, 0, 0);
+      targetTime = utcMidnight - selectedTimeZone.offset * 60 * 60 * 1000;
     }
 
-    const difference = target.getTime() - now.getTime();
+    const difference = targetTime - now.getTime();
 
     if (difference <= 0) {
       return { days: 0, hours: 0, minutes: 0, seconds: 0, totalSeconds: 0 };
